@@ -9,8 +9,8 @@
         :root { --primary-color: #185ee0; --secondary-color: rgba(10, 110, 142, 0.2); }
         * { box-sizing: border-box; }
         body { font-family: 'Inter', sans-serif; margin: 0; display: flex; align-items: center; justify-content: center; height: 100vh; padding: 20px; }
-        .container { display: flex; flex-direction: column; align-items: center; justify-content: center; width: 100%; max-width: 800px; padding: 20px; border-radius: 10px; box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1); }
-        .tabs { display: flex; position: relative; padding: 0.75rem; border-radius: 5px; width: 100%; justify-content: space-between; box-shadow: 0 6px 12px rgba(24, 94, 224, 0.15); }
+        .container { display: flex; flex-direction: column; align-items: center; justify-content: center; width: 100%; max-width: 800px; padding: 20px; background: white; border-radius: 10px; } /* White background, no shadow */
+        .tabs { display: flex; position: relative; padding: 0.75rem; border-radius: 5px; width: 100%; justify-content: space-between; box-shadow: none; } /* Remove shadow from tabs */
         input[type="radio"] { display: none; }
         .tab { flex-grow: 1; display: flex; align-items: center; justify-content: center; padding: 0 10px; font-size: 1rem; font-weight: 500; color: grey; cursor: pointer; transition: color 0.15s ease-in; }
         .notification { display: inline-block; min-width: 2rem; height: 2rem; margin-left: 10px; font-size: 0.8rem; border-radius: 50%; background-color: var(--secondary-color); color: grey; text-align: center; line-height: 2rem; transition: background-color 0.15s, color 0.15s; }
@@ -20,7 +20,7 @@
         input#radio-1:checked ~ .glider { transform: translateX(0%); }
         input#radio-2:checked ~ .glider { transform: translateX(100%); }
         input#radio-3:checked ~ .glider { transform: translateX(200%); }
-        .content { display: none; padding: 20px; background: white; box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1); margin-top: 20px; text-align: center; width: 100%; font-size: 1rem; color: #0a6e8e; }
+        .content { display: none; padding: 20px; background: white; margin-top: 20px; text-align: center; width: 100%; font-size: 1rem; color: #0a6e8e; }
         .content.active { display: block; }
         @media (max-width: 700px) { .glider { width: calc(100% / 3); } }
     </style>
