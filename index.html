@@ -4,132 +4,25 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Healthcare Billing Metrics Dashboard</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
     <style>
-        :root {
-            --primary-color: #185ee0;
-        }
-
-        *, *:after, *:before {
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: "Inter", sans-serif;
-            margin: 0;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            height: 100vh;
-            padding: 20px;
-        }
-
-        .container {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            width: 100%;
-            max-width: 800px;
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
-        }
-
-        .tabs {
-            display: flex;
-            position: relative;
-            box-shadow: 0 0 1px rgba(24, 94, 224, 0.15), 0 6px 12px rgba(24, 94, 224, 0.15);
-            padding: 0.75rem;
-            border-radius: 5px;
-            width: 100%;
-            justify-content: space-between;
-        }
-
-        input[type="radio"] {
-            display: none;
-        }
-
-        .tab {
-            flex-grow: 1; /* Ensure tabs expand to fill the container */
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 0 10px;
-            font-size: 1rem;
-            font-weight: 500;
-            color: grey;
-            cursor: pointer;
-            transition: color 0.15s ease-in;
-            position: relative;
-            z-index: 2; /* Ensure tabs stay above the glider */
-        }
-
-        .notification {
-            display: inline-block;
-            min-width: 2rem;
-            height: 2rem;
-            margin-left: 10px;
-            font-size: 0.8rem;
-            border-radius: 50%;
-            background-color: var(--secondary-color);
-            color: grey;
-            transition: background-color 0.15s ease-in, color 0.15s ease-in;
-            text-align: center;
-            line-height: 2rem;
-        }
-
-        input[type="radio"]:checked + label {
-            color: var(--primary-color);
-        }
-
-        input[type="radio"]:checked + label .notification {
-            background-color: var(--primary-color);
-            color: #fff;
-        }
-
-        .glider {
-            position: absolute;
-            height: 54px;
-            width: calc(100% / 3); /* Adjust width to fit the container */
-            background-color: rgba(10, 110, 142, 0.2);
-            border: 2px solid #0a6e8e;
-            z-index: 1;
-            border-radius: 5px;
-            transition: transform 0.25s ease-out;
-            top: 0; /* Align with the top of the tabs */
-            transform: translateY(0); /* Ensure it starts at the correct position */
-        }
-
-        input[id="radio-1"]:checked ~ .glider { transform: translateX(0%); }
-        input[id="radio-2"]:checked ~ .glider { transform: translateX(100%); }
-        input[id="radio-3"]:checked ~ .glider { transform: translateX(200%); }
-
-        .content {
-            display: none;
-            padding: 20px;
-            background: white;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
-            margin-top: 20px;
-            text-align: center;
-            width: 100%;
-            font-size: 1rem;
-            color: #0a6e8e;
-            transition: opacity 0.3s ease;
-        }
-
-        .content.active {
-            display: block;
-        }
-
-        @media (max-width: 700px) {
-            .tabs, .content {
-                width: 100%;
-            }
-            .glider {
-                width: calc(100% / 3); /* Adjust to smaller width */
-            }
-        }
+        :root { --primary-color: #185ee0; --secondary-color: rgba(10, 110, 142, 0.2); }
+        * { box-sizing: border-box; }
+        body { font-family: 'Inter', sans-serif; margin: 0; display: flex; align-items: center; justify-content: center; height: 100vh; padding: 20px; }
+        .container { display: flex; flex-direction: column; align-items: center; justify-content: center; width: 100%; max-width: 800px; padding: 20px; border-radius: 10px; box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1); }
+        .tabs { display: flex; position: relative; padding: 0.75rem; border-radius: 5px; width: 100%; justify-content: space-between; box-shadow: 0 6px 12px rgba(24, 94, 224, 0.15); }
+        input[type="radio"] { display: none; }
+        .tab { flex-grow: 1; display: flex; align-items: center; justify-content: center; padding: 0 10px; font-size: 1rem; font-weight: 500; color: grey; cursor: pointer; transition: color 0.15s ease-in; }
+        .notification { display: inline-block; min-width: 2rem; height: 2rem; margin-left: 10px; font-size: 0.8rem; border-radius: 50%; background-color: var(--secondary-color); color: grey; text-align: center; line-height: 2rem; transition: background-color 0.15s, color 0.15s; }
+        input:checked + label { color: var(--primary-color); }
+        input:checked + label .notification { background-color: var(--primary-color); color: #fff; }
+        .glider { position: absolute; height: 54px; width: calc(100% / 3); background-color: var(--secondary-color); border: 2px solid #0a6e8e; z-index: 1; border-radius: 5px; transition: transform 0.25s ease-out; top: 0; }
+        input#radio-1:checked ~ .glider { transform: translateX(0%); }
+        input#radio-2:checked ~ .glider { transform: translateX(100%); }
+        input#radio-3:checked ~ .glider { transform: translateX(200%); }
+        .content { display: none; padding: 20px; background: white; box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1); margin-top: 20px; text-align: center; width: 100%; font-size: 1rem; color: #0a6e8e; }
+        .content.active { display: block; }
+        @media (max-width: 700px) { .glider { width: calc(100% / 3); } }
     </style>
 </head>
 <body>
@@ -145,24 +38,22 @@
     </div>
     <div class="content active" id="content-1">
         <h2>Claims Collection Rate (CCR)</h2>
-        <p>Cube Therapy Billing excels with a remarkable 98.9% CCR, well above the industry average of 85%, ensuring maximum reimbursement efficiency and minimizing financial disruption for healthcare providers.</p>
+        <p>Cube Therapy Billing excels with a 98.9% CCR, far above the industry average of 85%, ensuring maximum reimbursement efficiency.</p>
     </div>
     <div class="content" id="content-2">
         <h2>Accounts Receivable Days (AR Days)</h2>
-        <p>With only 18 AR days for claims over 90 days, Cube Therapy Billing showcases exceptional financial control. This performance significantly betters the industry average of 50 days, accelerating cash flow and surpassing typical industry benchmarks.</p>
+        <p>With 18 AR days, we outperform the industry average of 50 days, boosting cash flow and financial control.</p>
     </div>
     <div class="content" id="content-3">
         <h2>Denial Rate</h2>
-        <p>Achieving an impressive 1.9% denial rate, Cube Therapy Billing sets a high standard in revenue cycle management. This rate is far lower than the industry average of 5-10%, effectively reducing typical financial losses associated with claim rejections.</p>
+        <p>At just 1.9%, our denial rate is significantly lower than the industry standard of 5-10%, minimizing financial loss.</p>
     </div>
 </div>
 
 <script>
     document.querySelectorAll('input[type="radio"]').forEach(radio => {
         radio.addEventListener('change', function() {
-            document.querySelectorAll('.content').forEach(content => {
-                content.classList.remove('active');
-            });
+            document.querySelectorAll('.content').forEach(content => content.classList.remove('active'));
             document.getElementById('content-' + this.id.split('-')[1]).classList.add('active');
         });
     });
